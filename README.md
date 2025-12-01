@@ -39,3 +39,29 @@ pyspark_healthcare_etl/
 ├── tests/              # Unit Tests
 ├── main.py             # Pipeline Entry Point
 └── requirements.txt    # Dependencies
+
+```
+
+🚀 How to Run
+
+Clone the repository:
+git clone [https://github.com/YOUR_USERNAME/pyspark-healthcare-etl.git](https://github.com/YOUR_USERNAME/pyspark-healthcare-etl.git)
+cd pyspark_healthcare_etl
+
+Install dependencies:
+pip install -r requirements.txt
+
+Run the pipeline:
+python main.py
+
+Run Tests:
+pytest
+
+💡 Key Features & Engineering Decisions
+Explicit Schema Definition: Prevents data type errors and improves read performance.
+
+Modular Design: Transformation logic is separated from I/O operations, making the code testable and reusable.
+
+Windows/Hadoop Compatibility: Implemented a robust fallback mechanism in src/jobs/load_job.py to handle Parquet writes gracefully on Windows environments without native Hadoop binaries (using Pandas/PyArrow bridge).
+
+Clean Code: Follows PEP 8 standards with Type Hinting.
