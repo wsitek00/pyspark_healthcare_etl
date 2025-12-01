@@ -1,6 +1,7 @@
 from src.utils.spark_session import get_spark_session
 from src.jobs.extraction_job import load_data
 from src.transformations.symptoms import transform_symptoms_to_array
+from src.jobs.analysis_job import analyze_symptom_frequency, analyze_disease_distribution_sql
 import os
 
 def main():
@@ -16,16 +17,19 @@ def main():
         raw_df = load_data(spark, input_path)
         
         # 2. TRANSFORM
-        print(f"2. Transforming data (Parsing Symptoms)...")
+        print(f"2. Transforming data...")
         processed_df = transform_symptoms_to_array(raw_df)
         
-        # 3. SHOW RESULTS
-        print("Data Preview (After Transformation):")
-        processed_df.select("Patient_ID", "Symptoms", "Symptoms_Array", "Actual_Symptom_Count").show(5, truncate=False)
+        # 3. ANALYSIS (Insights)
+        print(f"3. Running Analysis...")
         
-        # QA Check (Quality Assurance)
-        print("Data Quality Check (Sample discrepancy):")
-        processed_df.filter("Symptom_Count != Actual_Symptom_Count").show()
+        print("\n--- TOP 5 MOST COMMON SYMPTOMS (PySpark Explode) ---")
+        symptoms_df = analyze_symptom_frequency(processed_df)
+        symptoms_df.show(5, truncate=False)
+        
+        print("\n--- TOP 10 DISEASES & AVG AGE (Spark SQL) ---")
+        diseases_df = analyze_disease_distribution_sql(spark, processed_df)
+        diseases_df.show(10, truncate=False)
         
     except Exception as e:
         print(f"Pipeline failed: {e}")
