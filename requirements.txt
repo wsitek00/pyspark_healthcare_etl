@@ -1,0 +1,16 @@
+# --- Core ETL ---
+pyspark==3.5.0          # Silnik przetwarzania danych
+pandas>=2.0.0           # Do operacji na mniejszych danych i integracji ze Sparkiem
+pyyaml==6.0.1           # Do wczytywania konfiguracji (pliki .yaml)
+
+# --- Testing (SDLC) ---
+pytest==7.4.3           # Framework do testów jednostkowych
+pytest-cov==4.1.0       # Raportowanie pokrycia kodu testami (Code Coverage)
+
+# --- Code Quality (Clean Code) ---
+black==23.11.0          # Automatyczne formatowanie kodu (standard rynkowy)
+flake8==6.1.0           # Wykrywanie błędów i nieużywanych zmiennych
+isort==5.12.0           # Automatyczne sortowanie importów
+
+# --- Notebooks ---
+jupyter==1.0.0          # Do pracy z folderem /notebooks
