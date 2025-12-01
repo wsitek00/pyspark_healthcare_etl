@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession, DataFrame
-from src.utils.schemas import get_healtchcare_schema
+from src.utils.schemas import get_healthcare_schema
 import os
 
 def load_data(spark: SparkSession, file_path: str) -> DataFrame:
@@ -13,7 +13,7 @@ def load_data(spark: SparkSession, file_path: str) -> DataFrame:
     Return:
         DataFrame: Loaded data.
     """
-    schema = get_healtchcare_schema()
+    schema = get_healthcare_schema()
     # Check if file exists to provide a clear error message
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"The file '{file_path}' does not exist. Please check the path.")
